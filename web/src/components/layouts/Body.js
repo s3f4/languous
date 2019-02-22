@@ -1,25 +1,20 @@
 import React, { Component } from 'react'
 import Card from '../card/Card';
+import WordForm from '../forms/WordForm';
 
 class Body extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+
     render() {
         return (
             <div>
-                <div style={{ clear: "both" }} className="ui fitted divider"></div>
-                <div style={{ margin: "20px" }}>
-                    <div className="ui text container">
-                        <div className="ui three column grid">
-                            <div className=" wide column"><Card /></div>
-                            <div className=" wide column"><Card /></div>
-                            <div className=" wide column"><Card /></div>
-                            <div className=" wide column"><Card /></div>
-                            <div className=" wide column"><Card /></div>
-                            <div className=" wide column"><Card /></div>
-                            <div className=" wide column"><Card /></div>
-                            <div className=" wide column"><Card /></div>
-                        </div>
-                    </div>
-                </div>
+                {this.props.content}
             </div>
         )
     }

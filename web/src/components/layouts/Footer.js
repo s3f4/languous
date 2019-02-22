@@ -5,7 +5,7 @@ export const Footer = () =>
     <div>
         <div className="ui inverted vertical footer segment">
             <div className="ui center aligned container">
-                <img alt="test" src="https://semantic-ui.com/examples/assets/images/logo.png" className="ui centered mini image"></img>
+                <img alt="test" src="/favicon.ico" className="ui centered mini image"></img>
                 <div className="ui horizontal inverted small divided link list">
                     <Link to="#" className="item" href="#">Site Map</Link>
                     <Link to="#" className="item" href="#">Contact Us</Link>
