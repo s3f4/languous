@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Card from '../card/Card';
-import WordForm from '../forms/WordForm';
 
 class Body extends Component {
 
@@ -13,7 +11,7 @@ class Body extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", justifyItems: "center", margin: "50px auto" }}>
                 {this.props.content}
             </div>
         )

@@ -1,0 +1,373 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "userName": "sefasahin",
+      "userEmail": "sefa@dehaa.com",
+      "password": "test1234"
+    },
+    {
+      "id": 1,
+      "userName": "sefasahin2",
+      "userEmail": "sefa2@dehaa.com",
+      "password": "test1234"
+    },
+    {
+      "id": 1,
+      "userName": "sefasahin3",
+      "userEmail": "sefa3@dehaa.com",
+      "password": "test1234"
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 2
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 3
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 4
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 5
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 6
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 7
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 8
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 9
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 10
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 11
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 12
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 13
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 14
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 15
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 16
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 17
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 18
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 19
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 20
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 21
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 22
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 23
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 24
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 25
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 26
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 27
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 28
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 29
+    },
+    {
+      "newUser": {
+        "userEmail": "efawf",
+        "userName": "s",
+        "password": "sefasefa",
+        "passwordRepeat": "fasdfas"
+      },
+      "id": 30
+    },
+    {
+      "userEmail": "sssss",
+      "userName": "s",
+      "password": "sefasefa",
+      "passwordRepeat": "",
+      "id": 31
+    },
+    {
+      "userEmail": "aaaaa",
+      "userName": "s",
+      "password": "sefasefa",
+      "passwordRepeat": "",
+      "id": 32
+    },
+    {
+      "userEmail": "gdasgdasaaaaa",
+      "userName": "s",
+      "password": "sefasefa",
+      "passwordRepeat": "gadsgas",
+      "id": 33
+    },
+    {
+      "userEmail": "",
+      "userName": "s",
+      "password": "sefasefa",
+      "passwordRepeat": "",
+      "id": 34
+    },
+    {
+      "userEmail": "",
+      "userName": "s",
+      "password": "sefasefa",
+      "passwordRepeat": "",
+      "id": 35
+    },
+    {
+      "userEmail": "",
+      "userName": "s",
+      "password": "sefasefa",
+      "passwordRepeat": "",
+      "id": 36
+    },
+    {
+      "userEmail": "asfasd",
+      "userName": "s",
+      "password": "sefasefa",
+      "passwordRepeat": "",
+      "id": 37
+    },
+    {
+      "userEmail": "sadfas",
+      "userName": "s",
+      "password": "sefasefa",
+      "passwordRepeat": "fasfasd",
+      "id": 38
+    },
+    {
+      "userEmail": "fasdfas",
+      "userName": "s",
+      "password": "sefasefa",
+      "passwordRepeat": "asdfas",
+      "id": 39
+    },
+    {
+      "userEmail": "fasdfasdasfas",
+      "userName": "sfsdafas",
+      "password": "sefasefafasdfas",
+      "passwordRepeat": "asdfasfsadf",
+      "id": 40
+    }
+  ],
+  "words": [
+    {
+      "id": "1",
+      "user_id": "1",
+      "word": "hi",
+      "translation": "merhaba"
+    },
+    {
+      "id": "2",
+      "user_id": "1",
+      "word": "hello",
+      "translation": "merhaba"
+    },
+    {
+      "id": "3",
+      "user_id": "1",
+      "word": "how are you",
+      "translation": "Nasılsın"
+    }
+  ]
+}

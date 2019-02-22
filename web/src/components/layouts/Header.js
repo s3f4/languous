@@ -7,17 +7,19 @@ class Header extends Component {
             <div>
                 <div style={{ display: "flex", margin: "10px", justifyContent: "center" }}>
                     <div className="ui secondary menu">
-                        <div className="item"><Link to="/"><img alt="sgs" src="/languous.png"></img></Link></div>
+                        <div className="item">
+                            <Link style={{ margin: "0 5px" }} to="/register" className="ui tiny button"><i className="paper icon"></i>Words</Link>
+                            <Link style={{ margin: "0 5px" }} to="/register" className="ui tiny button"><i className="user icon"></i>Users</Link>
+                        </div>
+
                         <div className="right menu">
                             <div className="item">
-                                <div className="ui action left icon input">
-                                    <i className="search icon"></i>
-                                    <input type="text" placeholder="Search" />
-                                    <button className="ui button">Submit</button>
-                                </div>
+                                <div className="item"><Link to="/"><img alt="sgs" src="/languous.png"></img></Link></div>
                             </div>
                             <div className="item">
+
                                 <div className="ui buttons">
+                                    <Link style={{ margin: "0 5px" }} to="/register" className="ui tiny button"><i className="pencil alternate icon"></i>New</Link>
                                     <Link to="/login" className="ui primary button">Login</Link>
                                     <div className="or"></div>
                                     <Link to="/register" className="ui primary button">Register</Link>

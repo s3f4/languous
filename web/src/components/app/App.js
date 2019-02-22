@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from '../layouts/Header';
-import Body from '../layouts/Body';
-import Footer from '../layouts/Footer';
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import LoginForm from '../forms/LoginForm';
 import RegisterForm from '../forms/RegisterForm';
 import ErrorPage from '../../pages/ErrorPage';
 import MainPage from '../../pages/MainPage';
+import { store } from "../../index"
 
 class App extends Component {
+  componentWillUpdate = () => {
+    console.log(store.getState());
+  }
   render() {
     return (
       <Router>
