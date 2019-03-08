@@ -33,7 +33,7 @@ func InitRouter() *gin.Engine{
 	router.Use(middleware.JwtAuthentication())
 
 	router.POST("/words",wordHandler.Add)
-	router.PUT("/words",wordHandler.Update)
+	router.PUT("/words/:word_id",wordHandler.Update)
 	router.DELETE("words/:word_id",wordHandler.Delete)
 
 	router.NoRoute(func(c *gin.Context) {

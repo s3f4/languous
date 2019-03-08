@@ -3,7 +3,9 @@ package handler
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"server/controller"
+	"server/logger"
 	"server/model"
 	u "server/util"
 	"strconv"
@@ -15,26 +17,31 @@ var wordHandler *WordHandler
 
 var wordController *controller.WordC
 
-func NewWordHandler() *WordHandler{
-	if wordController == nil{
+func NewWordHandler() *WordHandler {
+	if wordController == nil {
 		wordController = controller.WordController
 	}
-	if wordHandler == nil{
+	if wordHandler == nil {
 		wordHandler = new(WordHandler)
 	}
 	return wordHandler
 }
 
+func getUserId(c *gin.Context) uint64 {
+	ctx := c.Request.Context()
+	return ctx.Value("user").(uint64)
+}
+
 //Add a word
 func (WordHandler) Add(c *gin.Context) {
 	word := &model.Word{}
-	ctx := c.Request.Context()
-	userID := ctx.Value("user").(uint64)
+
+	userID := getUserId(c)
 
 	json.NewDecoder(c.Request.Body).Decode(word)
 
 	if errMessage, ok := word.Validate(); ok {
-		wordController.Add(word, &model.User{UserID:userID})
+		wordController.Add(word, &model.User{UserID: userID})
 
 		var message map[string]interface{}
 		if word.WordID <= 0 {
@@ -44,9 +51,9 @@ func (WordHandler) Add(c *gin.Context) {
 			message["word"] = word
 		}
 
-		u.SendResponse(c,nil, message)
+		u.SendResponse(c, nil, message)
 	} else {
-		u.SendResponse(c,nil, errMessage)
+		u.SendResponse(c, nil, errMessage)
 	}
 
 }
@@ -54,30 +61,79 @@ func (WordHandler) Add(c *gin.Context) {
 //Get a word
 func (WordHandler) Get(c *gin.Context) {
 
-	wordID ,err := strconv.Atoi(c.Param("word_id"))
-	if err != nil{
-		u.SendResponse(c,nil,u.Message(false,"malformed parameters"))
+	wordID, err := strconv.Atoi(c.Param("word_id"))
+	if err != nil {
+		u.SendResponse(c, nil, u.Message(false, "malformed parameters"))
 		return
 	}
 
 	word := &model.Word{WordID: uint64(wordID)}
-	wordController.Get(word)
-	response := u.Message(true,"word.Get")
-	response["word"] = word
-	u.SendResponse(c,nil,response)
+	*word = wordController.Get(word)
+	if word.WordID != 0 {
+		response := u.Message(true, "word.Get")
+		response["word"] = word
+		u.SendResponse(c, nil, response)
+	} else {
+		response := u.Message(false, "word not found")
+		u.SendResponse(c, nil, response)
+
+	}
+
 }
 
 //Update word
-func (WordHandler) Update(c *gin.Context) {}
+func (WordHandler) Update(c *gin.Context) {
+	wordID, err := strconv.Atoi(c.Param("word_id"))
+	var newWord *model.Word
+	err = json.NewDecoder(c.Request.Body).Decode(&newWord)
+	if(err != nil){
+
+	}
+	if (err != nil) {
+		logger.Info(err.Error())
+	}
+	userID := getUserId(c)
+	word := &model.Word{WordID: uint64(wordID)}
+	*word = wordController.Get(word)
+
+	if word.UserID == userID{
+		wordController.Update(word,map[string]interface{}{
+			"word":        newWord.Word,
+			"translation": newWord.Translation,
+		})
+	}
+}
 
 //Delete word
-func (WordHandler) Delete(c *gin.Context) {}
+func (WordHandler) Delete(c *gin.Context) {
+	wordID, err := strconv.Atoi(c.Param("word_id"))
+	if (err != nil) {
+		logger.Info(err.Error())
+	}
+	userID := getUserId(c)
+	word := &model.Word{WordID: uint64(wordID)}
+	*word = wordController.Get(word)
+
+	if word.WordID != 0 {
+		if userID == word.UserID {
+			wordController.Delete(word)
+			response := u.Message(true, "word.Delete")
+			u.SendResponse(c, nil, response)
+		} else {
+			response := u.Message(false, "No permission")
+			u.SendResponse(c, http.StatusForbidden, response)
+		}
+	} else {
+		response := u.Message(false, "Word Not found")
+		u.SendResponse(c, http.StatusNotFound, response)
+	}
+}
 
 //GetAll get all words
 func (WordHandler) GetAll(c *gin.Context) {
 	var words []model.Word
 	words = wordController.GetAll()
-	response := u.Message(true,"words.GetAll")
+	response := u.Message(true, "words.GetAll")
 	response["words"] = words
-	u.SendResponse(c,nil,response)
+	u.SendResponse(c, nil, response)
 }

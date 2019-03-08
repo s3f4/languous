@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"os"
 	"server/config"
 	"server/middleware"
