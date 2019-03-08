@@ -1,0 +1,6 @@
+config/production.json
+log
+.env
+.idea
+go_build_NewServer
+go.sum

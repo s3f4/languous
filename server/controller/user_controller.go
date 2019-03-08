@@ -1,0 +1,131 @@
+package controller
+
+import (
+	"github.com/dgrijalva/jwt-go"
+	"github.com/jinzhu/gorm"
+	"golang.org/x/crypto/bcrypt"
+	"os"
+	"server/logger"
+	"server/model"
+	u "server/util"
+	"strings"
+)
+
+type UserC struct {
+	 *BaseC
+}
+
+//Create User
+func (uc *UserC) Create(user *model.User) map[string]interface{} {
+	uc.Connect()
+	defer uc.Close()
+
+	if resp, ok := uc.Validate(user); !ok {
+		return resp
+	}
+
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	user.Password = string(hashedPassword)
+
+	uc.DB.Create(user)
+
+	if user.UserID <= 0 {
+		return u.Message(false, "Failed to create account, connection error.")
+	}
+
+	//Create new JWT token for the newly registered account
+	tk := &model.Token{UserID: user.UserID}
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
+	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
+	user.Token = tokenString
+
+	user.Password = ""
+	user.PasswordRepeat = ""
+	response := u.Message(true, "Account has been created")
+	response["user"] = user
+	return response
+}
+
+//Validate incoming user details...
+func (uc *UserC) Validate(user *model.User) (map[string]interface{}, bool) {
+	if !strings.Contains(user.UserEmail, "@") {
+		return u.Message(false, "Email address is required"), false
+	}
+
+	if len(user.UserName) == 0 {
+		return u.Message(false, "User Name can not be blank"), false
+	}
+
+	if len(user.Password) < 6 {
+		return u.Message(false, "Password can not be less than 6"), false
+	}
+
+	if user.Password != user.PasswordRepeat {
+		return u.Message(false, "Password and Password Repeat is not equal"), false
+	}
+
+	//uc.Connect()
+	//defer uc.Close()
+
+	//Email must be unique
+	temp := &model.User{}
+
+	//check for errors and duplicate emails
+	err := uc.DB.Table("user").Where("user_email = ?", user.UserEmail).First(temp).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		logger.Info(err.Error())
+		return u.Message(false, "Connection error. Please retry"), false
+	}
+	if temp.UserEmail != "" {
+		return u.Message(false, "Email address already in use by another user."), false
+	}
+
+	return u.Message(false, "Requirement passed"), true
+}
+
+
+// Login user
+func (uc *UserC) Login(email, password string) map[string]interface{} {
+	uc.Connect()
+	defer uc.Close()
+	user := &model.User{}
+	err := uc.DB.Table("user").Where("user_email = ?", email).First(user).Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return u.Message(false, "Email address not found")
+		}
+		return u.Message(false, "Connection error. Please retry")
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword { //Password does not match!
+		return u.Message(false, "Invalid login credentials. Please try again")
+	}
+	//Worked! Logged In
+	user.Password = ""
+
+	//Create JWT token
+	tk := &model.Token{UserID: user.UserID}
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
+	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
+	user.Token = tokenString //Store the token in the response
+
+	resp := u.Message(true, "Logged In")
+	resp["user"] = user
+	return resp
+}
+
+//GetUser
+func (uc *UserC) GetUser(u uint) *model.User {
+	uc.Connect()
+	defer uc.Close()
+
+	user := &model.User{}
+	uc.DB.Table("user").Where("user_id = ?", u).First(user)
+	if user.UserEmail == "" { //User not found!
+		return nil
+	}
+
+	user.Password = ""
+	return user
+}
