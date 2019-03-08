@@ -3,17 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux"
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import promise from "redux-promise-middleware"
-import userReducers from "./reducers/UserReducers"
+import reducers from "./reducers"
 
-
-const reducers = combineReducers({
-    users: userReducers
-});
 
 export const store = createStore(reducers, applyMiddleware(
     thunk,
@@ -21,7 +17,6 @@ export const store = createStore(reducers, applyMiddleware(
     logger
 ));
 
-console.log(store.getState())
 
 ReactDOM.render(
     <Provider store={store}>

@@ -8,8 +8,8 @@ class Header extends Component {
                 <div style={{ display: "flex", margin: "10px", justifyContent: "center" }}>
                     <div className="ui secondary menu">
                         <div className="item">
-                            <Link style={{ margin: "0 5px" }} to="/register" className="ui tiny button"><i className="paper icon"></i>Words</Link>
-                            <Link style={{ margin: "0 5px" }} to="/register" className="ui tiny button"><i className="user icon"></i>Users</Link>
+                            <Link style={{ margin: "0 5px" }} to="/words" className="ui tiny button"><i className="tags icon"></i>Words</Link>
+                            <Link style={{ margin: "0 5px" }} to="/users" className="ui tiny button"><i className="user icon"></i>Users</Link>
                         </div>
 
                         <div className="right menu">

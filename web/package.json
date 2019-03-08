@@ -10,15 +10,16 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
     "redux": "^4.0.1",
+    "redux-form": "^8.1.0",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.0",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "REACT_APP_ENV=DEVELOPMENT react-scripts start",
+    "build": "env=DEVELOPMENT react-scripts build",
+    "test": "env=DEVELOPMENT react-scripts test",
+    "eject": "env=DEVELOPMENT react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

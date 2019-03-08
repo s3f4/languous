@@ -6,30 +6,50 @@ import "./Form.css";
 import { connect } from "react-redux";
 import { userAdd } from "../../actions/UserActions"
 
+
+
 class RegisterForm extends Component {
+
     constructor(props) {
         super(props);
-        this.state = {
-            userEmail: "",
-            userName: "",
-            password: "",
-            passwordRepeat: ""
-        }
         this.changeInput = this.changeInput.bind(this);
+        this.state = {
+            loading: false,
+            error: {}
+        }
+    }
+
+    formValidation() {
+        const { userName, userEmail, password, passwordRepeat } = this.props
+
+        if (password !== passwordRepeat) {
+            this.setState({ error: "password and passwordrepeat aren't matched" });
+        }
+
+        if (password.length < 6) {
+            this.setState({ error: "password count can't be less then 6" });
+        }
+
+        if (!userName.length || !userEmail.length) {
+            this.setState({ error: "UserName or UserEmail can't be blank" });
+        }
+
+        return this.state.error
     }
 
     changeInput = function (e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
     }
 
     register = (e) => {
         e.preventDefault();
-        console.log(this.state);
-        this.props.userAdd(this.state);
-    }
 
+        if (this.formValidation()) {
+            this.props.userAdd(this.props.userForm);
+        } else {
+
+        }
+
+    }
 
 
     render() {
@@ -46,14 +66,14 @@ class RegisterForm extends Component {
                                 <input
                                     className="registerInput"
                                     onChange={this.changeInput}
-                                    value={this.state.userEmail}
+                                    value={this.props.userEmail}
                                     name="userEmail" type="text" placeholder="email..." />
                             </div>
                             <label>UserName:</label>
                             <div style={{ width: "100%" }} className="ui input">
                                 <input
                                     onChange={this.changeInput}
-                                    value={this.state.userName}
+                                    value={this.props.userName}
                                     name="userName"
                                     type="text"
                                     placeholder="Type your username ex johndoe123..." />
@@ -62,7 +82,7 @@ class RegisterForm extends Component {
                             <div style={{ width: "100%" }} className="ui input">
                                 <input
                                     onChange={this.changeInput}
-                                    value={this.state.password}
+                                    value={this.props.password}
                                     name="password"
                                     type="password"
                                     placeholder="Type your password..." />
@@ -71,7 +91,7 @@ class RegisterForm extends Component {
                             <div style={{ width: "100%" }} className="ui input">
                                 <input
                                     onChange={this.changeInput}
-                                    value={this.state.passwordRepeat}
+                                    value={this.props.passwordRepeat}
                                     name="passwordRepeat"
                                     type="password"
                                     placeholder="Type your password repeat..." />
@@ -94,8 +114,13 @@ class RegisterForm extends Component {
     }
 }
 
-const mapDispatchToProps = {
-    userAdd
+const mapStateToProps = state => {
+    const { userEmail, userName, password, passwordRepeat } = state.userReducer;
+    return { userEmail, userName, password, passwordRepeat };
 }
 
-export default connect(null, mapDispatchToProps)(RegisterForm);
+const mapDispatchToProps = {
+    userAdd,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);

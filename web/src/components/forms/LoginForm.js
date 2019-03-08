@@ -4,25 +4,47 @@ import Footer from '../layouts/Footer';
 import Body from '../layouts/Body';
 
 class LoginForm extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            userName: "",
+            password: ""
+        }
+    }
+
+    changeInput = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
     render() {
         const loginForm = (
             <div>
-                <div style={{ margin: "10px auto", width: "700px" }} className="ui card">
+                <div style={{ margin: "10px auto", width: "400px" }} className="ui card">
                     <div className="content">
-                        <div className="header">Add New Word</div>
+                        <div className="header">Login</div>
                     </div>
                     <div className="content">
-                        <label>Word:</label>
+                        <label>UserName:</label>
                         <div style={{ width: "100%" }} className="ui input">
-                            <input name="word" style={{ margin: "10px auto", width: "100%" }} type="text" placeholder="Type your word..." />
+                            <input
+                                onChange={this.changeInput}
+                                name="userName"
+                                type="text" placeholder="userName..." />
                         </div>
-                        <label>Translation:</label>
+                        <label>Password:</label>
                         <div style={{ width: "100%" }} className="ui input">
-                            <input name="word-translation" style={{ margin: "10px auto", width: "100%" }} type="text" placeholder="Type translation..." />
+                            <input
+                                onChange={this.changeInput}
+                                name="password"
+                                type="password" placeholder="password..." />
                         </div>
                     </div>
                     <div className="extra content">
-                        <button className="ui primary button">Add Your New Word</button>
+                        <button className="ui primary button">Login</button>
                     </div>
                 </div>
             </div>
