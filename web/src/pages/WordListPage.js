@@ -5,46 +5,45 @@ import Body from '../components/layouts/Body';
 import Footer from '../components/layouts/Footer';
 import { connect } from "react-redux"
 import { fetchAllWords } from "../actions/WordActions"
+import Loader from '../components/common/Loader';
 
 
 class WordListPage extends Component {
+
     componentWillMount() {
         this.props.fetchAllWords();
-        console.log(this.props);
     }
+
     render() {
         let content;
         if (this.props.fetching) {
-            content = "loading..."
-        }
-
-        if (this.props.words) {
-            content =
+            content = <Loader />
+        } else {
+            content = (
                 <div className="ui text container">
                     <div className="ui three column grid">
                         {this.props.words.map(word => {
-                            return <WordList key={word.id} word={word} />
+                            return <WordList key={word.WordID} word={word} />
                         })}
                     </div>
                 </div>
-        } else {
-            content = "";
+            )
         }
+
 
         return (
             <div>
                 <Header />
                 <Body content={content} />
                 <Footer />
-                {JSON.stringify(this.props)}
             </div>
         )
     }
 }
 
 //state.wordreducers
-const mapStateToProps = ({ wordReducer }) => {
-    return wordReducer;
+const mapStateToProps = (state) => {
+    return state.wordReducer;
 }
 
 const mapDispatchToProps = {

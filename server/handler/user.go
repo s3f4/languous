@@ -3,10 +3,12 @@ package handler
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"server/controller"
 	"server/logger"
 	"server/model"
 	u "server/util"
+	"time"
 )
 
 //UserHandler struct
@@ -29,17 +31,23 @@ func NewUserHandler() *UserHandler{
 
 
 //Register method
-func (UserHandler) Register(c *gin.Context) {
+func (UserHandler) Signup(c *gin.Context) {
+	time.Sleep(time.Second*3)
 	user := &model.User{}
 	err := json.NewDecoder(c.Request.Body).Decode(user)
 	if err != nil {
 		logger.Error(err.Error())
-		u.SendResponse(c,nil, u.Message(false, "Invalid request"))
+		u.SendResponse(c,http.StatusUnprocessableEntity, u.Message(false, "Invalid request"))
 		return
 	}
 
-	resp := userController.Create(user) //Create account
+	resp,isAcceptable := userController.Create(user) //Create account
+	if(!isAcceptable){
+		u.SendResponse(c,http.StatusUnprocessableEntity, resp)
+	}
+
 	u.SendResponse(c,nil, resp)
+
 }
 
 //Login method

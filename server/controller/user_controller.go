@@ -16,12 +16,12 @@ type UserC struct {
 }
 
 //Create User
-func (uc *UserC) Create(user *model.User) map[string]interface{} {
+func (uc *UserC) Create(user *model.User) (map[string]interface{},bool) {
 	uc.Connect()
 	defer uc.Close()
 
 	if resp, ok := uc.Validate(user); !ok {
-		return resp
+		return resp,false
 	}
 
 	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
@@ -30,7 +30,7 @@ func (uc *UserC) Create(user *model.User) map[string]interface{} {
 	uc.DB.Create(user)
 
 	if user.UserID <= 0 {
-		return u.Message(false, "Failed to create account, connection error.")
+		return u.Message(false, "Failed to create account, connection error."),false
 	}
 
 	//Create new JWT token for the newly registered account
@@ -43,7 +43,7 @@ func (uc *UserC) Create(user *model.User) map[string]interface{} {
 	user.PasswordRepeat = ""
 	response := u.Message(true, "Account has been created")
 	response["user"] = user
-	return response
+	return response,true
 }
 
 //Validate incoming user details...

@@ -1,31 +1,69 @@
 import {
-    USER_ADD_PENDING,
-    USER_ADD_REJECTED,
-    USER_ADD_FULFILLED,
+    SIGNUP_PENDING,
+    SIGNUP_REJECTED,
+    SIGNUP_FULFILLED,
+
+    LOGIN_PENDING,
+    LOGIN_REJECTED,
+    LOGIN_FULFILLED,
+    LOGOUT,
 } from "../actions"
 
 
 const INITIAL_STATE = {
     user: {},
+    auth: localStorage.getItem("token"),
     loading: false,
     error: {}
 };
-
+/**
+ * User Reducers
+ */
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case USER_ADD_PENDING:
-            return {
-                ...state
-            }
-        case USER_ADD_FULFILLED:
+        case LOGOUT:
+            debugger;
             return {
                 ...state,
-                user: action.payload
+                user: {},
+                auth: null
             }
-        case USER_ADD_REJECTED:
+        case LOGIN_PENDING:
             return {
                 ...state,
-                error: action.payload.message
+                loading: true
+            }
+        case LOGIN_FULFILLED:
+            debugger;
+            return {
+                ...state,
+                auth: action.payload.token,
+                user: action.payload,
+                loading: false
+            }
+        case LOGIN_REJECTED:
+            return {
+                ...state,
+                error: action.payload.message,
+                loading: false
+            }
+        case SIGNUP_PENDING:
+            return {
+                ...state,
+                loading: true
+            }
+        case SIGNUP_FULFILLED:
+            return {
+                ...state,
+                auth: action.payload.token,
+                user: action.payload,
+                loading: false
+            }
+        case SIGNUP_REJECTED:
+            return {
+                ...state,
+                error: action.payload.message,
+                loading: false
             }
         default:
             return state;

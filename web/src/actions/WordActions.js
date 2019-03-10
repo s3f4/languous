@@ -11,7 +11,7 @@ export const fetchAllWords = () => {
         dispatch({
             type: FETCH_WORDS,
             payload: axios.get(`${config[process.env.REACT_APP_ENV].apiUrl}/words`)
-                .then(result => console.log(result))
+                .then(result => result.data.words)
         })
     }
 }

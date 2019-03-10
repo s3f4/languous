@@ -9,6 +9,7 @@ import (
 	"server/model"
 	u "server/util"
 	"strconv"
+	"time"
 )
 
 type WordHandler struct{}
@@ -131,6 +132,7 @@ func (WordHandler) Delete(c *gin.Context) {
 
 //GetAll get all words
 func (WordHandler) GetAll(c *gin.Context) {
+	time.Sleep(time.Second*2)
 	var words []model.Word
 	words = wordController.GetAll()
 	response := u.Message(true, "words.GetAll")

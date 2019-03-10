@@ -6,6 +6,8 @@ import (
 	"os"
 	"server/handler"
 	"server/middleware"
+	"github.com/itsjamie/gin-cors"
+	"time"
 )
 
 //router
@@ -22,9 +24,18 @@ func InitRouter() *gin.Engine{
 
 	router.Use(gin.Logger())
 	router.Use(middleware.ErrorMiddleware())
+	router.Use(cors.Middleware(cors.Config{
+		Origins:        "*",
+		Methods:        "GET, PUT, POST, DELETE",
+		RequestHeaders: "Origin, Authorization, Content-Type",
+		ExposedHeaders: "",
+		MaxAge: 50 * time.Second,
+		Credentials: true,
+		ValidateHeaders: false,
+	}))
 
 
-	router.POST("/u/register", userHandler.Register)
+	router.POST("/u/signup", userHandler.Signup)
 	router.POST("/u/login", userHandler.Login)
 
 	router.GET("/words",wordHandler.GetAll)

@@ -19,7 +19,7 @@ var NoAuth []string
 var JwtAuthentication = func() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
-		notAuth := []string{"/register", "/login"} //List of endpoints that doesn't require auth
+		notAuth := []string{"/u/signup", "/u/login"} //List of endpoints that doesn't require auth
 		requestPath := c.Request.URL.String()
 		logger.Info(requestPath)
 

@@ -11,7 +11,7 @@ class Body extends Component {
 
     render() {
         return (
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", justifyItems: "center", margin: "50px auto" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", justifyItems: "center", margin: "50px auto", minHeight: "250px" }}>
                 {this.props.content}
             </div>
         )

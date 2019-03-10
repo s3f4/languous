@@ -7,6 +7,7 @@ import RegisterForm from '../forms/RegisterForm';
 import ErrorPage from '../../pages/ErrorPage';
 import MainPage from '../../pages/MainPage';
 import WordListPage from '../../pages/WordListPage';
+import Profile from '../../pages/Profile';
 
 class App extends Component {
   render() {
@@ -14,7 +15,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={MainPage} />
-          <Route exact path="/profile" component={RegisterForm} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/my-words" component={LoginForm} />
           <Route exact path="/words" component={WordListPage} />
           <Route exact path="/login" component={LoginForm} />

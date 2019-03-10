@@ -6,10 +6,10 @@ export const WordList = (props) =>
             <div className="content">
                 <i className="right floated like icon"></i>
                 <i className="right floated star icon"></i>
-                <div className="header">{props.word.word}</div>
+                <div className="header">{props.word.Word}</div>
                 <div className="description">
                     <p>
-                        {props.word.translation}
+                        {props.word.Translation}
                     </p>
                 </div>
             </div>
