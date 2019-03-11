@@ -22,7 +22,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LOGOUT:
-            debugger;
             return {
                 ...state,
                 user: {},
@@ -34,7 +33,6 @@ export default (state = INITIAL_STATE, action) => {
                 loading: true
             }
         case LOGIN_FULFILLED:
-            debugger;
             return {
                 ...state,
                 auth: action.payload.token,

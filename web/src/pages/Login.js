@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Header from '../layouts/Header';
-import Footer from '../layouts/Footer';
-import Body from '../layouts/Body';
+import Header from '../components/layouts/Header';
+import Footer from '../components/layouts/Footer';
+import Body from '../components/layouts/Body';
 import { connect } from "react-redux"
-import * as actions from "../../actions"
+import * as actions from "../actions"
 
-class LoginForm extends Component {
+class Login extends Component {
 
     constructor(props) {
         super(props);
@@ -13,6 +13,15 @@ class LoginForm extends Component {
             email: "",
             password: ""
         }
+    }
+
+    componentDidMount = () => {
+        document.title = "languous.com | Log in";
+        if (this.props.auth) {
+            this.props.history.push("/")
+        }
+
+        console.log(this.props);
     }
 
     changeInput = (e) => {
@@ -71,7 +80,7 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return state
+    return state.userReducer;
 }
 
-export default connect(mapStateToProps, actions)(LoginForm);
+export default connect(mapStateToProps, actions)(Login);

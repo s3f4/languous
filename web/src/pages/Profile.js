@@ -7,15 +7,17 @@ import Footer from '../components/layouts/Footer';
 
 class Profile extends Component {
     render() {
-        console.log(this.props)
+        const content = JSON.stringify(this.props.userReducer.user)
         return (
             <div>
                 <Header />
-                <Body connect={null} />
+                <Body content={content} />
                 <Footer />
             </div>
         )
     }
 }
 
-export default Auth(connect()(Profile))
+const mapStateToProps = state => state
+
+export default Auth(connect(mapStateToProps, null)(Profile))

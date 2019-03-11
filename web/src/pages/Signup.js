@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import Header from '../layouts/Header';
-import Body from '../layouts/Body';
-import Footer from '../layouts/Footer';
-import "./Form.css";
+import Header from '../components/layouts/Header';
+import Body from '../components/layouts/Body';
+import Footer from '../components/layouts/Footer';
+import "../components/forms/Form.css";
 import { connect } from "react-redux";
-import { signup } from "../../actions/UserActions"
-import Loader from '../common/Loader';
+import { signup } from "../actions/UserActions"
+import Loader from '../components/common/Loader';
 
-class RegisterForm extends Component {
+class Signup extends Component {
 
     constructor(props) {
         super(props);
@@ -17,33 +17,38 @@ class RegisterForm extends Component {
             password: "",
             password_repeat: "",
             auth: null,
-            error: {}
+            error: null
         }
     }
 
     componentDidMount = () => {
+        document.title = "languous.com | Sign Up";
         if (this.props.auth) {
             this.props.history.push("/")
         }
     }
 
 
-    formValidation() {
+    formValidation = () => {
         const { user_name, email, password, password_repeat } = this.state
+        const error = {};
 
         if (password !== password_repeat) {
-            this.setState({ error: "password and passwordrepeat aren't matched" });
+            error.password_repeat = "password and passwordrepeat aren't matched";
         }
 
         if (password.length < 6) {
-            this.setState({ error: "password count can't be less then 6" });
+            error.password = "password count can't be less then 6";
         }
 
-        if (!user_name.length || !email.length) {
-            this.setState({ error: "UserName or UserEmail can't be blank" });
+        if (!user_name.length) {
+            error.user_name = "user name can't be blank"
         }
 
-        return this.state.error
+        if (!email.length) {
+            error.email = "email can't be blank";
+        }
+        return error;
     }
 
     changeInput = (e) => {
@@ -52,21 +57,18 @@ class RegisterForm extends Component {
         })
     }
 
+
     register = (e) => {
         e.preventDefault();
         const { user_name, email, password, password_repeat } = this.state;
-        if (this.formValidation()) {
+        const errors = this.formValidation();
+        if (!Object.keys(errors).length) {
             this.props.signup({ user_name, email, password, password_repeat }, () => {
                 this.props.history.push("/words");
             });
+        } else {
+            this.setState({ error: errors });
         }
-
-        console.log(this.props);
-
-        if (this.props.error) {
-            //this.props.history.push("/")
-        }
-
     }
 
 
@@ -77,6 +79,7 @@ class RegisterForm extends Component {
         } else {
             content = (
                 <div>
+                    {this.state.error ? JSON.stringify(this.state.error) : null}
                     <form onSubmit={this.register} method="post">
                         <div style={{ margin: "10px auto", width: "700px" }} className="ui card">
                             <div className="content">
@@ -147,4 +150,4 @@ const mapDispatchToProps = {
     signup,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

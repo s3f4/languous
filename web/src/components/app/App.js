@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import LoginForm from '../forms/LoginForm';
-import RegisterForm from '../forms/RegisterForm';
+import Login from '../../pages/Login';
+import Signup from '../../pages/Signup';
 import ErrorPage from '../../pages/ErrorPage';
-import MainPage from '../../pages/MainPage';
-import WordListPage from '../../pages/WordListPage';
+import Words from '../../pages/Words';
 import Profile from '../../pages/Profile';
+import WordForm from '../forms/WordForm';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={MainPage} />
+          <Route exact path="/" component={Words} />
           <Route exact path="/profile" component={Profile} />
-          <Route exact path="/my-words" component={LoginForm} />
-          <Route exact path="/words" component={WordListPage} />
-          <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/register" component={RegisterForm} />
+          <Route exact path="/words" component={Words} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Signup} />
+          <Route exact path="/words/new" component={WordForm} />
           <Route component={ErrorPage} />
         </Switch>
       </Router>

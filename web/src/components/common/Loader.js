@@ -18,7 +18,6 @@ export default class Loader extends Component {
                         sizeUnit={"px"}
                         size={60}
                         color={'#2185d0'}
-                        loading={this.props.fetching}
                     />
                     <br style={{ clear: "both" }} />
                 </div>

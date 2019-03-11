@@ -8,7 +8,7 @@ import { fetchAllWords } from "../actions/WordActions"
 import Loader from '../components/common/Loader';
 
 
-class WordListPage extends Component {
+class Words extends Component {
 
     componentWillMount() {
         this.props.fetchAllWords();
@@ -30,7 +30,6 @@ class WordListPage extends Component {
             )
         }
 
-
         return (
             <div>
                 <Header />
@@ -50,4 +49,4 @@ const mapDispatchToProps = {
     fetchAllWords
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WordListPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Words);

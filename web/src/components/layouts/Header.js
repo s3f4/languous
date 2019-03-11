@@ -2,15 +2,14 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import * as actions from "../../actions"
+import { Redirect } from "react-router-dom"
 
 class Header extends Component {
 
     logout = () => {
-        console.log(this);
-        console.log(this.props);
         this.props.signout(() => {
-            //TODO redirect
-            //this.props.history.push("/words");
+            debugger;
+            return <Redirect to="/words" />
         });
     }
 
@@ -30,18 +29,19 @@ class Header extends Component {
                             </div>
                             <div className="item">
 
-                                <div className="ui buttons">
-                                    {
-                                        this.props.userReducer.auth ?
-                                            (<div><Link style={{ margin: "0 5px" }} to="/register" className="ui tiny button"><i className="pencil alternate icon"></i>New</Link>
-                                                <button className="ui primary button" onClick={this.logout}>Logout</button>
-                                            </div>)
-                                            :
-                                            (<div><Link to="/login" className="ui primary button">Login</Link>
-                                                <div className="or"></div>
-                                                <Link to="/register" className="ui primary button">Register</Link></div>)
-                                    }
-                                </div>
+                                {
+                                    this.props.userReducer.auth ?
+                                        <div className="ui buttons">
+                                            <Link style={{ margin: "0 5px" }} to="/words/new" className="ui tiny button"><i className="pencil alternate icon"></i>New</Link>
+                                            <button className="ui primary button" onClick={this.logout}>Logout</button>
+                                        </div>
+                                        :
+                                        <div className="ui buttons">
+                                            <Link to="/login" className="ui primary button">Login</Link>
+                                            <div className="or"></div>
+                                            <Link to="/register" className="ui primary button">Register</Link>
+                                        </div>
+                                }
                             </div>
                         </div>
                     </div>
