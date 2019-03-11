@@ -40,9 +40,10 @@ export default (state = INITIAL_STATE, action) => {
                 loading: false
             }
         case LOGIN_REJECTED:
+            debugger;
             return {
                 ...state,
-                error: action.payload.message,
+                error: action.payload.response.data.message,
                 loading: false
             }
         case SIGNUP_PENDING:

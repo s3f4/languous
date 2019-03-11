@@ -108,7 +108,7 @@ func (WordHandler) Update(c *gin.Context) {
 //Delete word
 func (WordHandler) Delete(c *gin.Context) {
 	wordID, err := strconv.Atoi(c.Param("word_id"))
-	if (err != nil) {
+	if err != nil {
 		logger.Info(err.Error())
 	}
 	userID := getUserId(c)

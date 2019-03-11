@@ -1,5 +1,6 @@
 import axios from "axios";
 import { config } from "../config"
+export const apiURL = config[process.env.REACT_APP_ENV].apiUrl
 
 
 export const SIGNUP = "SIGNUP";
@@ -20,26 +21,16 @@ export const LOGOUT = "LOGOUT";
  * @param {*} redirect  redirect function
  */
 export const login = (user, redirect) => {
-    return async dispatch => {
-        try {
-            dispatch({
-                type: LOGIN_PENDING
-            })
-            const result = await axios.post(`${config[process.env.REACT_APP_ENV].apiUrl}/u/login`, { ...user })
-            localStorage.setItem("token", result.data.user.token);
-            dispatch({
-                type: LOGIN_FULFILLED,
-                payload: result.data.user
-            });
-            redirect();
-            console.log(redirect)
-        } catch (error) {
-            dispatch({
-                type: LOGIN_REJECTED,
-                payload: error
-            })
-        }
-
+    return dispatch => {
+        dispatch({
+            type: LOGIN,
+            payload: axios.post(`${config[process.env.REACT_APP_ENV].apiUrl}/u/login`, { ...user })
+                .then(result => {
+                    localStorage.setItem("token", result.data.user.token);
+                    redirect();
+                    return result;
+                })
+        });
     }
 }
 /**
@@ -48,25 +39,16 @@ export const login = (user, redirect) => {
  * @param {function} redirect function
  */
 export const signup = (newUser, redirect) => {
-    return async dispatch => {
-        try {
-            dispatch({
-                type: SIGNUP_PENDING
-            })
-            const result = await axios.post(`${config[process.env.REACT_APP_ENV].apiUrl}/u/signup`, { ...newUser })
-            localStorage.setItem("token", result.data.user.token);
-            redirect();
-            dispatch({
-                type: SIGNUP_FULFILLED,
-                payload: result.data.user
-            })
-        } catch (error) {
-            dispatch({
-                type: SIGNUP_REJECTED,
-                payload: error
-            })
-        }
-
+    return dispatch => {
+        dispatch({
+            type: SIGNUP,
+            payload: axios.post(`${config[process.env.REACT_APP_ENV].apiUrl}/u/signup`, { ...newUser })
+                .then(result => {
+                    localStorage.setItem("token", result.data.user.token);
+                    redirect();
+                    return result;
+                })
+        })
     }
 }
 
@@ -86,3 +68,9 @@ export const signout = (redirect) => {
 
 export const userList = () => { }
 export const removeUser = () => { }
+
+export const profile = () => {
+    return async dispatch => {
+        axios.get(`${apiURL}/profile`)
+    }
+}

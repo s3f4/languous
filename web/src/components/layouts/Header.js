@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import * as actions from "../../actions"
-import { Redirect } from "react-router-dom"
+/**
+ * withRouter used to give history feature
+ */
+import { withRouter } from "react-router-dom"
 
 class Header extends Component {
 
     logout = () => {
         this.props.signout(() => {
-            debugger;
-            return <Redirect to="/words" />
+            this.props.history.push("/words");
         });
     }
 
@@ -55,4 +57,4 @@ class Header extends Component {
 const mapStateToProps = state => {
     return state;
 }
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, actions)(withRouter(Header));

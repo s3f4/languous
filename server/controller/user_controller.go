@@ -85,21 +85,21 @@ func (uc *UserC) Validate(user *model.User) (map[string]interface{}, bool) {
 
 
 // Login user
-func (uc *UserC) Login(email, password string) map[string]interface{} {
+func (uc *UserC) Login(email, password string) (map[string]interface{},bool) {
 	uc.Connect()
 	defer uc.Close()
 	user := &model.User{}
 	err := uc.DB.Table("user").Where("user_email = ?", email).First(user).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
-			return u.Message(false, "Email address not found")
+			return u.Message(false, "Email address not found"),false
 		}
-		return u.Message(false, "Connection error. Please retry")
+		return u.Message(false, "Connection error. Please retry"),false
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil && err == bcrypt.ErrMismatchedHashAndPassword { //Password does not match!
-		return u.Message(false, "Invalid login credentials. Please try again")
+		return u.Message(false, "Invalid login credentials. Please try again"),false
 	}
 	//Worked! Logged In
 	user.Password = ""
@@ -112,7 +112,7 @@ func (uc *UserC) Login(email, password string) map[string]interface{} {
 
 	resp := u.Message(true, "Logged In")
 	resp["user"] = user
-	return resp
+	return resp,true
 }
 
 //GetUser

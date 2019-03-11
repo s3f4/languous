@@ -6,8 +6,11 @@ import Body from '../components/layouts/Body';
 import Footer from '../components/layouts/Footer';
 
 class Profile extends Component {
+
+
+
     render() {
-        const content = JSON.stringify(this.props.userReducer.user)
+        const content = JSON.stringify(this.props.user)
         return (
             <div>
                 <Header />
@@ -18,6 +21,6 @@ class Profile extends Component {
     }
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = state => state.userReducer;
 
 export default Auth(connect(mapStateToProps, null)(Profile))

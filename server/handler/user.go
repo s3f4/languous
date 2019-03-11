@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"server/controller"
@@ -41,8 +42,8 @@ func (UserHandler) Signup(c *gin.Context) {
 		return
 	}
 
-	resp,isAcceptable := userController.Create(user) //Create account
-	if(!isAcceptable){
+	resp,ok := userController.Create(user) //Create account
+	if(!ok){
 		u.SendResponse(c,http.StatusUnprocessableEntity, resp)
 	}
 
@@ -55,11 +56,17 @@ func (UserHandler) Login(c *gin.Context) {
 	user := &model.User{}
 	err := json.NewDecoder(c.Request.Body).Decode(user)
 	if err != nil {
-		u.SendResponse(c,nil, u.Message(false, "Invalid request"))
+		u.SendResponse(c,http.StatusUnprocessableEntity, u.Message(false, "Invalid request"))
 		return
 	}
 
 	userController := controller.UserController
-	resp := userController.Login(user.UserEmail, user.Password)
+	resp,ok := userController.Login(user.UserEmail, user.Password)
+	if !ok {
+		fmt.Println(resp)
+		u.SendResponse(c,http.StatusUnprocessableEntity, resp)
+		return
+	}
+
 	u.SendResponse(c,nil, resp)
 }

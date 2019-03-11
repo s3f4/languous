@@ -9,12 +9,14 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import promise from "redux-promise-middleware"
 import reducers from "./reducers"
+import { composeWithDevTools } from "redux-devtools-extension";
 
-
-export const store = createStore(reducers, applyMiddleware(
-    thunk,
-    promise,
-    logger
+export const store = createStore(reducers, composeWithDevTools(
+    applyMiddleware(
+        thunk,
+        promise,
+        logger
+    )
 ));
 
 

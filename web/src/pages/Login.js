@@ -20,8 +20,6 @@ class Login extends Component {
         if (this.props.auth) {
             this.props.history.push("/")
         }
-
-        console.log(this.props);
     }
 
     changeInput = (e) => {
@@ -32,6 +30,7 @@ class Login extends Component {
 
     onSubmit = (e) => {
         const { email, password } = this.state;
+        console.log(this.props);
         this.props.login({ email, password }, () => {
             this.props.history.push("/profile")
         });
@@ -39,8 +38,10 @@ class Login extends Component {
     }
 
     render() {
+        console.log(this.props.error);
         const loginForm = (
             <div>
+                {Object.keys(this.props.error).length > 0 ? this.props.error : ""}
                 <form method="POST" onSubmit={this.onSubmit}>
                     <div style={{ margin: "10px auto", width: "400px" }} className="ui card">
                         <div className="content">
