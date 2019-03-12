@@ -57,7 +57,6 @@ class Signup extends Component {
         })
     }
 
-
     register = (e) => {
         e.preventDefault();
         const { user_name, email, password, password_repeat } = this.state;
@@ -83,7 +82,7 @@ class Signup extends Component {
                     <form onSubmit={this.register} method="post">
                         <div style={{ margin: "10px auto", width: "700px" }} className="ui card">
                             <div className="content">
-                                <div className="header">Register to use Languous.com everywhere</div>
+                                <div className="header">Register to use Languous.com</div>
                             </div>
                             <div className="content">
                                 <label>Email:</label>

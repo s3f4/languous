@@ -14,7 +14,7 @@ const INITIAL_STATE = {
     user: {},
     auth: localStorage.getItem("token"),
     loading: false,
-    error: {}
+    error: false,
 };
 /**
  * User Reducers
@@ -37,10 +37,10 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 auth: action.payload.token,
                 user: action.payload,
-                loading: false
+                loading: false,
+                error: false
             }
         case LOGIN_REJECTED:
-            debugger;
             return {
                 ...state,
                 error: action.payload.response.data.message,

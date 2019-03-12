@@ -28,7 +28,7 @@ export const login = (user, redirect) => {
                 .then(result => {
                     localStorage.setItem("token", result.data.user.token);
                     redirect();
-                    return result;
+                    return result.data.user;
                 })
         });
     }
@@ -46,7 +46,7 @@ export const signup = (newUser, redirect) => {
                 .then(result => {
                     localStorage.setItem("token", result.data.user.token);
                     redirect();
-                    return result;
+                    return result.data.user;
                 })
         })
     }

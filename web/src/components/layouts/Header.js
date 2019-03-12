@@ -30,9 +30,10 @@ class Header extends Component {
                                 <div className="item"><Link to="/"><img alt="sgs" src="/languous.png"></img></Link></div>
                             </div>
                             <div className="item">
-
+                                {console.log("header", this.props.auth)}
+                                {console.log(this.props)}
                                 {
-                                    this.props.userReducer.auth ?
+                                    this.props.auth ?
                                         <div className="ui buttons">
                                             <Link style={{ margin: "0 5px" }} to="/words/new" className="ui tiny button"><i className="pencil alternate icon"></i>New</Link>
                                             <button className="ui primary button" onClick={this.logout}>Logout</button>
@@ -55,6 +56,6 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => {
-    return state;
+    return state.userReducer;
 }
 export default connect(mapStateToProps, actions)(withRouter(Header));

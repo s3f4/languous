@@ -30,18 +30,27 @@ class Login extends Component {
 
     onSubmit = (e) => {
         const { email, password } = this.state;
-        console.log(this.props);
         this.props.login({ email, password }, () => {
-            this.props.history.push("/profile")
+            this.props.history.push(
+                "/"
+            )
         });
         e.preventDefault();
     }
 
     render() {
-        console.log(this.props.error);
+        const error = (
+            <div className="ui negative message">
+                <i className="close icon"></i>
+                <div className="header">
+                    Please retry
+            </div>
+                <p>{this.props.error}</p>
+            </div>
+        );
         const loginForm = (
             <div>
-                {Object.keys(this.props.error).length > 0 ? this.props.error : ""}
+                {this.props.error ? error : ""}
                 <form method="POST" onSubmit={this.onSubmit}>
                     <div style={{ margin: "10px auto", width: "400px" }} className="ui card">
                         <div className="content">
@@ -49,7 +58,7 @@ class Login extends Component {
                         </div>
                         <div className="content">
                             <label>E-Mail:</label>
-                            <div style={{ width: "100%" }} className="ui input">
+                            <div style={{ width: "100%" }} className={`ui input ${this.props.error.email}`}>
                                 <input
                                     onChange={this.changeInput}
                                     name="email"
