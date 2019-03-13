@@ -30,8 +30,6 @@ class Header extends Component {
                                 <div className="item"><Link to="/"><img alt="sgs" src="/languous.png"></img></Link></div>
                             </div>
                             <div className="item">
-                                {console.log("header", this.props.auth)}
-                                {console.log(this.props)}
                                 {
                                     this.props.auth ?
                                         <div className="ui buttons">

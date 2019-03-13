@@ -70,15 +70,38 @@ class Signup extends Component {
         }
     }
 
+    errors() {
+        const errors = []
+        if (this.state.error != null) {
+            for (const key in this.state.error) {
+                errors.push(this.state.error[key]);
+            }
+        }
+
+        return errors;
+    }
 
     render() {
+        const errors = this.errors();
         let content;
         if (this.props.loading) {
             content = <Loader />
         } else {
+            const error = (
+                <div className="ui negative message">
+                    <div className="header">
+                        Please retry
+                </div>
+                    {
+                        errors.map(error =>
+                            <p key={error}>{error}</p>
+                        )
+                    }
+                </div>
+            );
             content = (
                 <div>
-                    {this.state.error ? JSON.stringify(this.state.error) : null}
+                    {this.state.error ? error : null}
                     <form onSubmit={this.register} method="post">
                         <div style={{ margin: "10px auto", width: "700px" }} className="ui card">
                             <div className="content">

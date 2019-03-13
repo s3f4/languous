@@ -22,9 +22,9 @@ class Words extends Component {
             content = (
                 <div className="ui text container">
                     <div className="ui three column grid">
-                        {this.props.words.map(word => {
+                        {this.props.words.length ? this.props.words.map(word => {
                             return <WordList key={word.WordID} word={word} />
-                        })}
+                        }) : <div style={{ margin: "0 auto" }} className="content">Word Not Found</div>}
                     </div>
                 </div>
             )
