@@ -1,6 +1,6 @@
+config/production.json
 log
 .env
 go.sum
 vendor
 .DS_Store
-config/production.json
