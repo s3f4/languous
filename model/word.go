@@ -8,7 +8,7 @@ import (
 
 // Word model
 type Word struct {
-	WordID      uint64 `gorm:"column:word_id;PRIMARY_KEY;AUTO_INCREMENT;NOT_NULL;"`
+	ID          uint64 `gorm:"column:word_id;PRIMARY_KEY;AUTO_INCREMENT;NOT_NULL;"`
 	UserID      uint64
 	User        User      `gorm:"save_associations:false;foreignkey:UserID;"`
 	Word        string    `gorm:"column:word;"`
